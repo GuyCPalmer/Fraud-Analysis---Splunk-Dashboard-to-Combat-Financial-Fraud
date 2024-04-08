@@ -47,8 +47,51 @@ Fraud: Target variable that shows if the transaction is fraudulent - 1 or non-fr
 
 1. Fraud Detection by Catergories:<br>
    sourcetype="fraud_detection.csv" | top category <br>
-   ![Category](assets/Category.png)<br>
+   <br>
+   <img src="assets/ByCategory.png" width="450">   <br>
 
-2. Fraud Distribution by Merchant ID:<br>
+2. Fraud Detection by Month:<br>
+   sourcetype="fraud_detection.csv" 
+   | eval Month=case(step=0, "May", step=1, "June", step=2, "July", step=3, "August")
+   | where fraud=1
+   | stats count as FraudDetections by Month
+   | sort - FraudDetections<br>
+   <br>
+   <img src="assets/Month.png" width="450">
+   
+3. Fraud Distribution by Merchant ID:<br>
    sourcetype="fraud_detection.csv" | stats sum(amount) by merchant | sort - sum(amount)<br>
-   ![Merchant ID](assets/ID.png)
+   <br>
+   <img src="assets/MID.png" width="450">
+
+4. Fraud Detection by Gender:<br>
+   sourcetype="fraud_detection.csv" fraud="1" | chart count over gender<br>
+   <br>
+   <img src="assets/Gender.png" width="450">
+
+5. Fraud Detection by Category and Gender:<br>
+   sourcetype="fraud_detection.csv" fraud="1" | chart count over category by gender<br>
+   <br>
+   <img src="assets/Category&Gender.png" width="450">
+
+6. Fraud Detection by Age and Gender:<br>
+   sourcetype="fraud_detection.csv" 
+   | chart count over age by gender <br>
+   <br>
+   <img src="assets/Age&Gender.png" width="450">
+
+7. Fraud Detection by Age:<br>
+   sourcetype="fraud_detection.csv"  age="*" fraud="1" | chart count as "fraud cases" over "age" <br>
+   <br>
+   <img src="assets/Age.png" width="450">
+
+
+8. Fraud Detection by Transaction Amount:<br>
+   sourcetype="fraud_detection.csv" | bin amount | stats count by amount<br>
+   <br>
+   <img src="assets/TransactionsAmount.png" width="450">
+
+9. Fraud Case Analysis by Transaction Amount:<br>
+   sourcetype="fraud_detection.csv" fraud="1" | table customer, amount<br>
+   <br>
+   <img src="assets/CaseBreakdown.png" width="450">
