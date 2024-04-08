@@ -46,4 +46,5 @@ Fraud: Target variable that shows if the transaction is fraudulent - 1 or non-fr
 <h4>Search Queries</h4>
 
 1. Fraud Detection by Catergories:<br>
-   sourcetype="fraud_detection.csv" | top category
+   sourcetype="fraud_detection.csv" | top category <br>
+   ![Category](assets/Category.png)<br>
