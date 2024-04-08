@@ -48,3 +48,7 @@ Fraud: Target variable that shows if the transaction is fraudulent - 1 or non-fr
 1. Fraud Detection by Catergories:<br>
    sourcetype="fraud_detection.csv" | top category <br>
    ![Category](assets/Category.png)<br>
+
+2. Fraud Distribution by Merchant ID:<br>
+   sourcetype="fraud_detection.csv" | stats sum(amount) by merchant | sort - sum(amount)<br>
+   ![Merchant ID](assets/ID.png)
